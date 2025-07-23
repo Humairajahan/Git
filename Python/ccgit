@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+import argparse
+from init import Init
+
+
+def main():
+    parser = argparse.ArgumentParser(description="ccgit: a minimal Git implementation")
+
+    sub_commands = parser.add_subparsers(dest="command", required=True)
+
+    init_parser = sub_commands.add_parser("init")
+    init_parser.add_argument("directory")
+
+    add_parser = sub_commands.add_parser("add")
+    add_parser.add_argument("a")
+
+    args = parser.parse_args()
+
+    if args.command == "init":
+        return Init(args.directory).init()
+
+
+if __name__ == "__main__":
+    print(main())
