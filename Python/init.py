@@ -22,9 +22,14 @@ class Init:
         Initialized empty Git repository in PATH/.git/
         """
 
+        # Create the root directory for the repository if it doesn't exist
+        os.makedirs(cwd, exist_ok=True)
+
+        # Create the .git directory to store git metadata
         git_init_dir = os.path.join(cwd, ".git")
         os.mkdir(git_init_dir)
 
+        # Define and create essential git files and folders
         files_list = ["HEAD", "config", "description"]
         folders_list = ["hooks", "info", "objects", "refs"]
 
@@ -39,7 +44,7 @@ class Init:
         return f"Initialized empty Git repository in {git_init_dir}/"
 
     def init(self):
-        # If the repository has been initialized already
+        # Check if the repository has been initialized already
         cwd = os.path.join(os.getcwd(), self.directory)
         git_initialized = os.path.isdir(os.path.join(cwd, ".git"))
 
