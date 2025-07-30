@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import argparse
-from init import Init
+from cli.init import Init
 
 
 def main():
