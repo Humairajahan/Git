@@ -30,16 +30,20 @@ class Init:
         os.mkdir(git_init_dir)
 
         # Define and create essential git files and folders
-        files_list = ["HEAD", "config", "description"]
+        files_list = {
+            "HEAD": "ref: refs/heads/master\n",
+            "config": "",
+            "description": "",
+        }
         folders_list = ["hooks", "info", "objects", "refs"]
 
         for folder in folders_list:
             os.mkdir(os.path.join(git_init_dir, folder))
 
-        for file in files_list:
-            filename = os.path.join(git_init_dir, file)
-            with open(filename, "a"):
-                os.utime(filename, None)
+        for file, content in files_list.items():
+            filepath = os.path.join(git_init_dir, file)
+            with open(filepath, "w") as f:
+                f.write(content)
 
         return f"Initialized empty Git repository in {git_init_dir}/"
 
